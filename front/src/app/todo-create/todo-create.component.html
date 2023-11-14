@@ -1,0 +1,24 @@
+<form (ngSubmit)="toDoForm.valid && onSubmit()" [formGroup]="toDoForm" #myForm="ngForm">
+
+<h1>Add a new to do</h1>
+    <div>
+        <h4><label for="item">Item</label></h4>
+        <input name="item" type="text" formControlName="item">
+    </div>
+    <div *ngIf="toDoForm.controls.item.errors && myForm.submitted">
+        <span *ngIf="toDoForm.controls.item.errors?.['required']">Item is required</span>
+    </div>
+
+    <div>
+        <h4><label for="deadline">Deadline</label></h4>
+        <input name="deadline" type="date" formControlName="deadline">
+    </div>
+     <div *ngIf="toDoForm.controls.deadline.errors && myForm.submitted">
+        <span *ngIf="toDoForm.controls.deadline.errors?.['required']">Deadline is required</span>
+    </div>
+
+    <div>
+      <button type="submit">Save</button>
+    </div>
+</form>
+

@@ -1,0 +1,22 @@
+<div *ngIf="toDoList">
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Item</th>
+        <th>Deadline</th>
+        <th>Done</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let toDo of toDoList">
+        <td>{{ toDo.id }}</td>
+        <td [ngStyle] = "{'text-decoration-line' : toDo.isCompleted ? 'line-through' : 'none'}">{{ toDo.item }}</td>
+        <td>{{ toDo.deadline }}</td>
+        <td><input type="checkbox" name="done" (click)="toggle(toDo)"/></td>
+        <td><mat-icon (click)="delete(toDo)">delete</mat-icon></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-todo-create><app-todo-create>
