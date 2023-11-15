@@ -1,20 +1,21 @@
-<div *ngIf="toDoList">
-  <table>
+<div class="container mt-5" *ngIf="toDoList">
+<h1>My to do list</h1>
+  <table class="table table-hover">
     <thead>
       <tr>
-        <th>Id</th>
-        <th>Item</th>
-        <th>Deadline</th>
-        <th>Done</th>
+        <th scope="col">Id</th>
+        <th scope="col">Item</th>
+        <th scope="col">Deadline</th>
+        <th scope="col">Done</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let toDo of toDoList">
-        <td>{{ toDo.id }}</td>
+      <tr class="table-light" *ngFor="let toDo of toDoList">
+        <th scope="row">{{ toDo.id }}</th>
         <td [ngStyle] = "{'text-decoration-line' : toDo.isCompleted ? 'line-through' : 'none'}">{{ toDo.item }}</td>
         <td>{{ toDo.deadline | date:'yy-MM-dd' }}</td>
-        <td><input type="checkbox" name="done" (click)="toggle(toDo)"/></td>
-        <td><mat-icon (click)="delete(toDo)">delete</mat-icon></td>
+        <td><input class="d-flex align-items-center mt-1" type="checkbox" name="done" (click)="toggle(toDo)"/></td>
+        <mat-icon (click)="delete(toDo)">delete</mat-icon>
       </tr>
     </tbody>
   </table>
