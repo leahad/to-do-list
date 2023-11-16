@@ -31,10 +31,6 @@ export class TodoCreateComponent {
     : new Date()
     );
     this.datePipe.transform(newToDo.deadline, 'yyyy-MM-dd');
-    // send to do to save to the service
-    this.toDoService.toDoToSave(newToDo).subscribe(response => {
-      console.log('Data sent with success', response);
-    })
     // send new to do to the todo-list component
     this.toDoList.emit(newToDo);
 

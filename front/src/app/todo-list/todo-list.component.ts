@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ToDo } from '../shared/model/todo.model';
 import { TodoService } from '../shared/todo.service';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
   toDoList!: any[];
@@ -14,10 +14,10 @@ export class TodoListComponent implements OnInit {
   constructor(private toDoService: TodoService){ }
 
   ngOnInit(): void {
-      this.toDoService.getToDoList().subscribe(data => {
-        this.toDoList = data;
-        this.isCompleted = data.isCompleted
-      })
+    this.toDoService.getToDoList().subscribe(data => {
+      this.toDoList = data;
+      // this.isCompleted = data.isCompleted
+    })
   }
 
   toggle(toDo: any) {
@@ -29,7 +29,11 @@ export class TodoListComponent implements OnInit {
   }
 
   getNewToDo(event: ToDo): void {
-    this.toDoList.push(event);
+    // send to do to save to the service
+    this.toDoService.toDoToSave(event).subscribe(response => {
+      console.log('Data sent with success', response);
+      this.toDoList.push(response);
+    })
   }
 
   delete(toDo: any) {
@@ -41,5 +45,4 @@ export class TodoListComponent implements OnInit {
     let toDoIndex = this.toDoList.indexOf(toDo);
     this.toDoList.splice(toDoIndex,1);
   }
-
 }
